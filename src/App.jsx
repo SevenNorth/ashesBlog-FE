@@ -16,6 +16,9 @@ export default class App extends Component {
         height:"100%",
       }}>
         <Router>
+          <div style={{
+            flex:1
+          }}>
             <Switch>
               <Route path='/app/home' component={Home}></Route>
               <Route path='/app/category' component={Category}></Route>
@@ -23,6 +26,7 @@ export default class App extends Component {
               <Route path='/app/admin' component={Admin}></Route>
               <Redirect to="/app/home" />
             </Switch>
+          </div>
           <CustomTabBar/>
         </Router>
       </div>
