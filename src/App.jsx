@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import CustomTabBar from './components/tabbar'
-import {BrowserRouter as Router,Route,Redirect,Switch} from 'react-router-dom'
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
-import Home from './views/home'
-import Category from './views/category'
-import New from './views/new'
-import Admin from './views/admin'
-
+import { tabbarRoutes } from './routes'
 export default class App extends Component {
   render() {
     return (
@@ -17,17 +13,20 @@ export default class App extends Component {
       }}>
         <Router>
           <div style={{
-            flex:1
+            flex:1,
+            overflowX:"hidden",
           }}>
             <Switch>
-              <Route path='/app/home' component={Home}></Route>
-              <Route path='/app/category' component={Category}></Route>
-              <Route path='/app/new' component={New}></Route>
-              <Route path='/app/admin' component={Admin}></Route>
-              <Redirect to="/app/home" />
+              {
+                tabbarRoutes.map(route=>(
+                  <Route path={route.path} component={route.component} key={route.path}></Route>
+                ))
+              }
             </Switch>
           </div>
-          <CustomTabBar/>
+          <div>
+            <CustomTabBar/>
+          </div>
         </Router>
       </div>
     )
