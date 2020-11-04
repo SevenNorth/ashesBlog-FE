@@ -3,6 +3,8 @@ import { Tabs, WhiteSpace, Badge, Card, Popover} from 'antd-mobile';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { EllipsisOutlined } from '@ant-design/icons';
 
+import './todoList.less'
+
 export default function TodoList(props) {
 
   const [visible, setVisible] = useState(false)
@@ -66,19 +68,6 @@ export default function TodoList(props) {
                 <Card >
                   <Card.Header
                     title={todo.title}
-                    extra={<span>{todo.completed?'已':'未'}完成</span>}
-                  />
-                  <Card.Body>
-                    <div
-                      style={{
-                        width:"100%",
-                        textAlign:"left",
-                        textIndent:"2em"
-                      }}
-                    >{todo.content}</div>
-                  </Card.Body>
-                  <Card.Footer 
-                    content="创建时间" 
                     extra={
                       <Popover mask
                         overlayClassName="fortest"
@@ -116,6 +105,19 @@ export default function TodoList(props) {
                         </div>
                       </Popover>
                     }
+                  />
+                  <Card.Body>
+                    <div
+                      style={{
+                        width:"100%",
+                        textAlign:"left",
+                        textIndent:"2em"
+                      }}
+                    >{todo.content}</div>
+                  </Card.Body>
+                  <Card.Footer 
+                    content="创建时间" 
+                    extra={<span>{todo.completed?'已':'未'}完成</span>}
                   />
                 </Card>
               <WhiteSpace size="lg" />
@@ -164,7 +166,6 @@ export default function TodoList(props) {
             {currentList}
           </div>
         </Tabs>
-        <WhiteSpace/>
       </StickyContainer>
     </div>
   )
