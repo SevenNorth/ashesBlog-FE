@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {NavBar,Drawer,Icon,Accordion, List} from 'antd-mobile'
+import {NavBar,Drawer } from 'antd-mobile'
+import { MenuUnfoldOutlined,MenuFoldOutlined } from '@ant-design/icons'
 
 import SearchTree from './tree'
 import './index.less'
 export default class Category extends Component {
   state={
     open:false,
-    showNav:true
   }
   onOpenChange=(...args)=>{
     console.log(args)
@@ -16,33 +16,10 @@ export default class Category extends Component {
     console.log(key);
   }
   render() {
-    // const sidebar=(
-    //   <div style={{ marginTop: 10, marginBottom: 10 }}>
-    //     <Accordion defaultActiveKey="0" className="my-accordion" onChange={this.onChange}>
-    //       <Accordion.Panel header="Title 1">
-    //         <List className="my-list">
-    //           <List.Item>content 1</List.Item>
-    //           <List.Item>content 2</List.Item>
-    //           <List.Item>content 3</List.Item>
-    //         </List>
-    //       </Accordion.Panel>
-    //       <Accordion.Panel header="Title 2" className="pad">this is panel content2 or other</Accordion.Panel>
-    //       <Accordion.Panel header="Title 3" className="pad">
-    //         text text text text text text text text text text text text text text text
-    //       </Accordion.Panel>
-    //     </Accordion>
-    //   </div>
-    // )
 
     return (
       <div className="catrgory-box">
-        {
-          this.state.showNav
-          ?
-          <NavBar icon={<Icon type="ellipsis" />} onLeftClick={this.onOpenChange}>Basic</NavBar>
-          :
-          null
-        }
+        <NavBar icon={this.state.open?<MenuFoldOutlined />:<MenuUnfoldOutlined />} onLeftClick={this.onOpenChange}>Basic</NavBar>
         <Drawer
           className="my-drawer"
           enableDragHandle

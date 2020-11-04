@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CustomTabBar from './components/tabbar'
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 
 import { tabbarRoutes } from './routes'
 export default class App extends Component {
@@ -11,23 +11,21 @@ export default class App extends Component {
         flexDirection:"column",
         height:"100%",
       }}>
-        <Router>
-          <div style={{
-            flex:1,
-            overflowX:"hidden",
-          }}>
-            <Switch>
-              {
-                tabbarRoutes.map(route=>(
-                  <Route path={route.path} component={route.component} key={route.path}></Route>
-                ))
-              }
-            </Switch>
-          </div>
-          <div>
-            <CustomTabBar/>
-          </div>
-        </Router>
+        <div style={{
+          flex:1,
+          overflowX:"hidden",
+        }}>
+          <Switch>
+            {
+              tabbarRoutes.map(route=>(
+                <Route path={route.path} component={route.component} key={route.path}></Route>
+              ))
+            }
+          </Switch>
+        </div>
+        <div>
+          <CustomTabBar/>
+        </div>
       </div>
     )
   }

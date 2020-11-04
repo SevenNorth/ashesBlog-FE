@@ -3,12 +3,21 @@ import { NavBar, Drawer } from 'antd-mobile'
 import React, { Component } from 'react'
 
 import AddToDo from './addTodo'
+// import Test from './test'
 import TodoList from './todoList'
 
 import './index.less'
 export default class Todo extends Component {
   state={
-    open:false
+    open:false,
+    todos:Array(6).fill(null).map((todo,index)=>{
+      return {
+        id: index,
+        title: '标题' + index,
+        content: '阿巴阿巴',
+        completed: Math.random() > 0.5 ? true : false
+      }
+    })
   }
 
   onOpenChange=(...args)=>{
@@ -27,6 +36,7 @@ export default class Todo extends Component {
             flex: 1,
           }}
           sidebar={<AddToDo close={this.onOpenChange} />}
+          // sidebar={<Test close={this.onOpenChange} />}
           sidebarStyle={{
             width:"100%",
             height:"60%"
@@ -35,20 +45,16 @@ export default class Todo extends Component {
           onOpenChange={this.onOpenChange}
           enableDragHandle
           dragHandleStyle={{
-            width:20,
-            height:40,
-            borderTopRightRadius:20,
-            borderBottomRightRadius:20,
-            top:"50%",
-            transform:"translate-y(50%)",
             display:"none"
           }}
-          position="top"
+          position="bottom"
           contentStyle={{
             textAlign:'center',
+            width:'100%',
+            height:"100%"
           }}
         >
-          <TodoList />
+          <TodoList todos={this.state.todos} />
         </Drawer>
         <div className="addNew"
           onClick={this.onOpenChange}
