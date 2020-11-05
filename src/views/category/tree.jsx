@@ -5,34 +5,6 @@ import './tree.less'
 
 const { Search } = Input;
 
-const x = 3;
-const y = 2;
-const z = 1;
-const gData = [];
-
-const generateData = (_level, _preKey, _tns) => {
-  const preKey = _preKey || '0';
-  const tns = _tns || gData;
-
-  const children = [];
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({ title: key, key });
-    if (i < y) {
-      children.push(key);
-    }
-  }
-  if (_level < 0) {
-    return tns;
-  }
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
-};
-generateData(z);
-
 const dataList = [];
 const generateList = data => {
   for (let i = 0; i < data.length; i++) {
@@ -44,7 +16,34 @@ const generateList = data => {
     }
   }
 };
-generateList(gData);
+
+const catalogue=[
+  {
+    key:'HTML',
+    title:'HTML',
+  },
+  {
+    key:'CSS',
+    title:'CSS',
+  },
+  {
+    key:'JS',
+    title:'JS',
+    children:[
+      {
+        key:'jichu',
+        title:'基础'
+      },
+      {
+        key:'jQuery',
+        title:'jQuery'
+      },
+    ]
+  },
+]
+
+generateList(catalogue);
+
 
 const getParentKey = (key, tree) => {
   let parentKey;
@@ -80,7 +79,7 @@ class SearchTree extends React.Component {
     const expandedKeys = dataList
       .map(item => {
         if (item.title.indexOf(value) > -1) {
-          return getParentKey(item.key, gData);
+          return getParentKey(item.key, catalogue);
         }
         return null;
       })
@@ -120,12 +119,12 @@ class SearchTree extends React.Component {
       });
     return (
       <div>
-        <Search style={{ marginBottom: 8 }} placeholder="Search" onChange={this.onChange} />
+        <Search style={{ marginBottom: 8 }} placeholder="搜索" onChange={this.onChange} />
         <Tree
           onExpand={this.onExpand}
           expandedKeys={expandedKeys}
           autoExpandParent={autoExpandParent}
-          treeData={loop(gData)}
+          treeData={loop(catalogue)}
         />
       </div>
     );

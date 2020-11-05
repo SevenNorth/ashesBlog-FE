@@ -1,15 +1,49 @@
-import React from 'react'
+// eslint-disable-next-line
+import React, { useEffect } from 'react'
 import { Button, NavBar, TextareaItem,  InputItem } from 'antd-mobile';
 import { CloseOutlined } from '@ant-design/icons';
-import {createForm} from 'rc-form'
+import { createForm } from 'rc-form'
+import moment from 'moment'
 
 function AddTodo(props) {
   const submit=()=>{
-    const content=props.form.getFieldsValue()
-    console.log(content)
+    if(props.addNew){
+      let content=props.form.getFieldsValue()
+      content={
+        ...content,
+        createAt:moment().format('YYYY-MM-DD HH:mm:ss'),
+        completed:false,
+      }
+      // console.log(content)
+      props.add(content)
+    }else{
+      let content=props.form.getFieldsValue()
+      props.modify(content)
+    }
     props.form.setFieldsValue({'title':'','content':''})
     props.close()
   }
+
+  const closeHandler=()=>{
+    props.close()
+  }
+
+
+  useEffect(() => {
+    const currentTodo = props.currentTodo[0]
+    if(currentTodo){
+      props.form.setFieldsValue({'title':currentTodo.title,'content':currentTodo.content})
+    }
+    // eslint-disable-next-line
+  }, [props.currentTodo])
+
+  useEffect(() => {
+    if(props.addNew){
+      props.form.setFieldsValue({'title':'','content':''})
+    }
+    // eslint-disable-next-line
+  }, [props.addNew])
+
   const { getFieldProps } = props.form;
   return (
     <div
@@ -24,8 +58,8 @@ function AddTodo(props) {
         <NavBar
           rightContent={<CloseOutlined />}
           mode="light"
-          onClick={props.close}
-        > 新建 </NavBar>
+          onClick={closeHandler}
+        > {props.addNew ? '新建' : '修改'} </NavBar>
         <InputItem
           clear
           placeholder="请输入标题"

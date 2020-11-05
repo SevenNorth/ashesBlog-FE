@@ -1,13 +1,15 @@
 import React,{useEffect, useState} from 'react'
-import { Tabs, WhiteSpace, Badge, Card, Popover} from 'antd-mobile';
+import { Tabs, WhiteSpace, Badge, Card, Modal } from 'antd-mobile';
 import { StickyContainer, Sticky } from 'react-sticky';
-import { EllipsisOutlined } from '@ant-design/icons';
+import { CheckCircleTwoTone, DeleteTwoTone, PushpinTwoTone } from '@ant-design/icons';
 
 import './todoList.less'
 
 export default function TodoList(props) {
 
-  const [visible, setVisible] = useState(false)
+  const [all, setAll] = useState(<div></div>)
+  const [todo, setTodo] = useState(<div></div>)
+  const [done, setDone] = useState(<div></div>)
 
   const tabs = [
     { title: <Badge>全部</Badge>},
@@ -21,40 +23,20 @@ export default function TodoList(props) {
     </Sticky>);
   }
 
-
-  const [currentList, setCurrentList] = useState(<div>all</div>)
+  const alert = Modal.alert;
 
   useEffect(()=>{
-    computed('全部')
+    const allList=props.todos
+    const todoList=props.todos.filter(todo=>!todo.completed)
+    const doneList=props.todos.filter(todo=>todo.completed)
+    setAll(tabContent(allList))
+    setTodo(tabContent(todoList))
+    setDone(tabContent(doneList))
     // eslint-disable-next-line
-  },[])
+  },[props.todos])
 
-  const onSelect = (opt) => {
-    console.log(opt.props);
-    setVisible(false);
-  };
-  const handleVisibleChange = (visible) => {
-    console.log(visible)
-    setVisible(visible);
-  };
-
-  const computed=(status)=>{
-    let current
-    switch (status) {
-      case "全部":
-        current=props.todos
-        break;
-      case "未完成":
-        current=props.todos.filter(todo=>!todo.completed)
-        break;
-      case "已完成":
-        current=props.todos.filter(todo=>todo.completed)
-        break;
-      default:
-        break
-    }
-
-    const tabContent=(
+  const tabContent=(current)=>{
+    return (
       <div 
         style={{
           width:"100%"
@@ -68,45 +50,13 @@ export default function TodoList(props) {
                 <Card >
                   <Card.Header
                     title={todo.title}
-                    extra={
-                      <Popover mask
-                        overlayClassName="fortest"
-                        overlayStyle={{ color: 'currentColor' }}
-                        visible={visible}
-                        overlay={[
-                        (<Popover.Item key="1" value="special" >切换为{todo.completed?'未':'已'}完成</Popover.Item>),
-                          (<Popover.Item key="2" value="special" >编辑</Popover.Item>),
-                          (<Popover.Item key="3" value="special" >删除</Popover.Item>),
-                        ]}
-                        align={{
-                          overflow: { adjustY: 0, adjustX: 0 },
-                          offset: [-10, 0],
-                        }}
-                        onVisibleChange={handleVisibleChange}
-                        onSelect={onSelect}
-                      >
-                        <div style={{
-                          height: '100%',
-                          padding: '0 15px',
-                          marginRight: '-15px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent:'flex-end'
-                        }}
-                        >
-                          <EllipsisOutlined 
-                            style={{
-                              width:"2rem",
-                              height:'1rem',
-                              border:'2px solid  #108EE9',
-                              borderRadius:5
-                            }} 
-                          />
-                        </div>
-                      </Popover>
-                    }
+                    extra={ todo.completed ? <CheckCircleTwoTone onClick={()=>props.toggle(todo.id)} /> : <PushpinTwoTone twoToneColor='#f00' onClick={()=>props.toggle(todo.id)} />}
                   />
-                  <Card.Body>
+                  <Card.Body
+                    onClick={()=>{
+                      props.modifyOpen(todo.id)
+                    }}
+                  >
                     <div
                       style={{
                         width:"100%",
@@ -116,8 +66,13 @@ export default function TodoList(props) {
                     >{todo.content}</div>
                   </Card.Body>
                   <Card.Footer 
-                    content="创建时间" 
-                    extra={<span>{todo.completed?'已':'未'}完成</span>}
+                    content={<div style={{textAlign:'left'}}>{todo.createAt}</div>} 
+                    extra={<DeleteTwoTone onClick={()=>{
+                      alert('删除', '真的要删除吗???', [
+                        { text: '取消', onPress: () => {} },
+                        { text: '确定', onPress: () => props.remove(todo.id) },
+                      ])
+                    }} />}
                   />
                 </Card>
               <WhiteSpace size="lg" />
@@ -127,8 +82,6 @@ export default function TodoList(props) {
         }
       </div>
     )
-
-    setCurrentList(tabContent)
   }
 
   return (
@@ -145,11 +98,9 @@ export default function TodoList(props) {
           initialPage={0}
           onChange={(tab, index) => { 
             // console.log('onChange', index, tab); 
-            computed(tab.title.props.children)
           }}
           onTabClick={(tab, index) => { 
             // console.log('onTabClick', index, tab); 
-            computed(tab.title.props.children)
           }}
           renderTabBar={renderTabBar}
           swipeable={true}
@@ -163,7 +114,29 @@ export default function TodoList(props) {
           }}
             className="test3"
           >
-            {currentList}
+            {all}
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            justifyContent: 'center', 
+            height: '100%', 
+            backgroundColor: '#fff' 
+          }}
+            className="test3"
+          >
+            {todo}
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            justifyContent: 'center', 
+            height: '100%', 
+            backgroundColor: '#fff' 
+          }}
+            className="test3"
+          >
+            {done}
           </div>
         </Tabs>
       </StickyContainer>
