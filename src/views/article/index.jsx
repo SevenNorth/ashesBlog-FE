@@ -18,7 +18,7 @@ export default class Article extends Component {
 
   render() {
     return (
-      <pre>{this.md.render(this.state.markdown)}</pre>
+      <div dangerouslySetInnerHTML={{__html: this.md.render(this.state.markdown)}}></div>
     )
   }
 }
