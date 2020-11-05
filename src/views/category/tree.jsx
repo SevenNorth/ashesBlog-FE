@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tree, Input } from 'antd';
 
+import { catalogue } from './catalogue'
 import './tree.less'
 
 const { Search } = Input;
@@ -17,30 +18,6 @@ const generateList = data => {
   }
 };
 
-const catalogue=[
-  {
-    key:'HTML',
-    title:'HTML',
-  },
-  {
-    key:'CSS',
-    title:'CSS',
-  },
-  {
-    key:'JS',
-    title:'JS',
-    children:[
-      {
-        key:'jichu',
-        title:'基础'
-      },
-      {
-        key:'jQuery',
-        title:'jQuery'
-      },
-    ]
-  },
-]
 
 generateList(catalogue);
 
