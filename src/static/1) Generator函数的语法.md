@@ -68,14 +68,13 @@ function*foo(x, y) { ··· }
   ```
   function* gen(){
     // some code
-}
+  }
   
   var g = gen();
   
   g[Symbol.iterator]() === g
   // true
   ```
-  
   
 
 ### 2. yield表达式
@@ -324,6 +323,8 @@ try {
 ```
 
 - 注：不要混淆遍历器对象的`throw`方法和全局的`throw`命令。后者只能被函数体外的`catch`语句捕获。
+
+  
 
 ```
 var g = function* () {
