@@ -1,7 +1,8 @@
 import React from 'react'
 import { Tree, Input } from 'antd';
 
-import { catalogue } from './catalogue'
+import { getCatalogue } from '../../api/catalogue'
+// import { catalogue } from './catalogue'
 import './tree.less'
 
 const { Search } = Input;
@@ -18,10 +19,10 @@ const generateList = data => {
   }
 };
 
+// const catalogue=getCatalogue()
+// generateList(catalogue); 
 
-generateList(catalogue);
-
-
+// 在onchange中调用
 const getParentKey = (key, tree) => {
   let parentKey;
   for (let i = 0; i < tree.length; i++) {
@@ -42,6 +43,7 @@ class SearchTree extends React.Component {
     expandedKeys: [],
     searchValue: '',
     autoExpandParent: true,
+    catalogue:[]
   };
 
   onExpand = expandedKeys => {
@@ -56,7 +58,7 @@ class SearchTree extends React.Component {
     const expandedKeys = dataList
       .map(item => {
         if (item.title.indexOf(value) > -1) {
-          return getParentKey(item.key, catalogue);
+          return getParentKey(item.key, this.state.catalogue);
         }
         return null;
       })
@@ -67,6 +69,16 @@ class SearchTree extends React.Component {
       autoExpandParent: true,
     });
   };
+
+  async componentWillMount(){
+    const test= await getCatalogue()
+    const catalogue=test.tree
+    generateList(catalogue)
+    this.setState({
+      catalogue
+    })
+  }
+
 
   render() {
     const { searchValue, expandedKeys, autoExpandParent } = this.state;
@@ -101,7 +113,7 @@ class SearchTree extends React.Component {
           onExpand={this.onExpand}
           expandedKeys={expandedKeys}
           autoExpandParent={autoExpandParent}
-          treeData={loop(catalogue)}
+          treeData={loop(this.state.catalogue)}
         />
       </div>
     );
