@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Home() {
+export default function Mine() {
   return (
     <div>
-      首页
+      我的
     </div>
   )
 }
