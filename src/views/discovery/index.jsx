@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Admin() {
+export default function Discovery() {
   return (
     <div>
-      管理员
+      发现
     </div>
   )
 }

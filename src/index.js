@@ -4,8 +4,8 @@ import {BrowserRouter as Router,Route,Redirect,Switch} from 'react-router-dom'
 
 import App from './App';
 import Article from './views/article'
-import 'antd-mobile/dist/antd-mobile.less';
-import 'antd/dist/antd.less'
+
+import './assets/less/reset.less'
 render(
   <Router>
     <Switch>

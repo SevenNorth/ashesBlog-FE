@@ -1,58 +1,28 @@
-import React from 'react'
+import React from 'react';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// import HomeIcon from '@material-ui/core'
+import HomeIcon from '@material-ui/icons/Home';
+
+import { tabbarRoutes } from '../routes'
 import { withRouter } from 'react-router-dom';
 
-import { TabBar } from 'antd-mobile';
-import { tabbarRoutes } from '../routes'
 
-import './tabbar.css'
+function SimpleBottomNavigation() {
+  const [value, setValue] = React.useState(0);
 
-class CustomTabBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTab: '/app/home',
-      hidden: false,
-    };
-  }
-
-  componentDidMount(){
-    this.setState({
-      selectedTab: this.props.location.pathname
-    })
-  }
-
-  render() {
-    return (
-      <div className="tabbar-box">
-        <TabBar
-          unselectedTintColor="#949494"
-          tintColor="#33A3F4"
-          barTintColor="white"
-          hidden={this.state.hidden}
-          tabBarPosition="bottom"
-        >
-          {
-            tabbarRoutes.map(route=>(
-              <TabBar.Item
-                icon={<route.meta.icon />}
-                title={route.meta.title}
-                selected={this.state.selectedTab===route.path}
-                selectedIcon={
-                  <route.meta.selectedIcon />
-                }
-                onPress={() => {
-                  this.setState({
-                    selectedTab: route.path,
-                  });
-                  this.props.history.push(route.path)
-                }}
-                key={route.path}
-              ></TabBar.Item>
-            ))
-          }
-        </TabBar>
-      </div>
-    );
-  }
+  return (
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+    >
+      {
+        tabbarRoutes.map(route => (<BottomNavigationAction label={route.meta.title} icon={<HomeIcon />} />))
+      }
+    </BottomNavigation>
+  );
 }
-export default withRouter(CustomTabBar)
+
+export default withRouter(SimpleBottomNavigation);

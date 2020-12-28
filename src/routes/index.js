@@ -1,53 +1,36 @@
-import { 
-  HomeOutlined,
-  HomeFilled,
-  FolderOutlined,
-  FolderOpenFilled,
-  EditOutlined,
-  EditFilled,
-  ToolFilled,
-  ToolOutlined
-  } from '@ant-design/icons'
-
 import Home from '../views/home'
-import Category from '../views/category'
-import Todo from '../views/todo'
-import Admin from '../views/admin'
+import Discovery from '../views/discovery'
+import Mine from '../views/mine'
+import Portfolio from '../views/portfolio'
 const tabbarRoutes=[
   {
     path:'/app/home',
     component:Home,
     meta:{
       title:'首页',
-      icon:HomeOutlined,
-      selectedIcon:HomeFilled
     }
   },
   {
-    path:'/app/category',
-    component:Category,
+    path:'/app/discovery',
+    component:Discovery,
     meta:{
-      title:'分类',
-      icon:FolderOutlined,
-      selectedIcon:FolderOpenFilled
+      title:'发现',
     }
   },
   {
-    path:'/app/todo',
-    component:Todo,
+    path:'/app/portfolio',
+    component:Portfolio,
     meta:{
-      title:'ToDo',
-      icon:EditOutlined,
-      selectedIcon:EditFilled
+      title:'作品集',
     }
   },
   {
-    path:'/app/admin',
-    component:Admin,
+    path:'/app/mine',
+    component:Mine,
     meta:{
-      title:'管理',
-      icon:ToolOutlined,
-      selectedIcon:ToolFilled
+      title:'我的',
+      // icon:ToolOutlined,
+      // selectedIcon:ToolFilled
     }
   },
 ]

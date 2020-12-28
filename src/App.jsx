@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import CustomTabBar from './components/tabbar'
 import {Route,Switch} from 'react-router-dom'
+
+import CustomTabBar from './components/tabbar'
 
 import { tabbarRoutes } from './routes'
 export default class App extends Component {
@@ -18,14 +19,12 @@ export default class App extends Component {
           <Switch>
             {
               tabbarRoutes.map(route=>(
-                <Route path={route.path} component={route.component} key={route.path}></Route>
+                <Route path={route.path} component={route.component} key={route.path}>{route.meta.title}</Route>
               ))
             }
           </Switch>
         </div>
-        <div>
-          <CustomTabBar/>
-        </div>
+        <CustomTabBar />
       </div>
     )
   }
