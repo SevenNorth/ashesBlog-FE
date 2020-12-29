@@ -3,13 +3,13 @@ import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 
 interface IMeta {
   title: string;
-  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> ;
   selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
 }
 
 interface ITabbarRoute {
   path: string;
-  component: React.ElementType;
+  component: React.ReactNode;
   meta: IMeta;
 }
 

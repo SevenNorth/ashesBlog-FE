@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Home :React.ElementType = () =>{
+const Home :React.FunctionComponent = () =>{
   return (
     <div>
       主页
