@@ -23,6 +23,7 @@ function Tabbar(props: any) {
 
   useEffect(() => {
     props.history.push(value);
+    // eslint-disable-next-line
   }, [value])
 
   return (
@@ -36,7 +37,7 @@ function Tabbar(props: any) {
                 icon={props.location.pathname === route.path ? <route.meta.selectedIcon style={{color:"#cc1111"}} /> : <route.meta.icon  />}
                 key={route.path}
                 value={route.path}
-                className={props.location.pathname === route.path ? classes.selected : undefined}
+                classes={{selected:classes.selected}}
                 showLabel />
             )
           })
