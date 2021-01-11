@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,9 +11,6 @@ const useStyles = makeStyles({
   selected: {
     color: "#cc1111",
   },
-  label: {
-    color: "#ff0000",
-  }
 });
 
 function Tabbar(props: any) {
@@ -22,8 +19,11 @@ function Tabbar(props: any) {
 
   const changeTab = (e: any, path: string) => {
     setValue(path);
-    props.history.push(path);
   }
+
+  useEffect(() => {
+    props.history.push(value);
+  }, [value])
 
   return (
     <div>
@@ -33,7 +33,7 @@ function Tabbar(props: any) {
             return (
               <BottomNavigationAction
                 label={route.meta.title}
-                icon={props.location.pathname === route.path ? <route.meta.selectedIcon /> : <route.meta.icon  />}
+                icon={props.location.pathname === route.path ? <route.meta.selectedIcon style={{color:"#cc1111"}} /> : <route.meta.icon  />}
                 key={route.path}
                 value={route.path}
                 className={props.location.pathname === route.path ? classes.selected : undefined}
