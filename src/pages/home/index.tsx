@@ -1,15 +1,70 @@
 import React from 'react'
+import { useState } from 'react'
+import List from '../../components/list'
+import Loading from '../../components/loading'
 
-import ListItem from '../../components/list'
+const testData = [
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  }
+]
 
-const Home :React.FunctionComponent = () =>{
+const testData2 = [
+  {
+    title: 'a2',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a2',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a2',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  }
+]
+
+const Home: React.FunctionComponent = () => {
+  let data = testData
+  
+  const [loading, setLoading] = useState(false)
+  const toggle=async (key:number)=>{
+    setLoading(true);
+    if(key===1){
+      data=testData
+    }else if(key === 2){
+      data = testData2
+    }
+    await setTimeout(()=>{},3000)
+    console.log(1,loading);
+    setLoading(false);
+    console.log(2,loading);
+  }
+
   return (
-    <div>
-      <ListItem title={'test'} summary={'123123123'} tags={[1,2,3]}>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-      </ListItem>
+    <div className="wrap">
+      <div className="navbar">
+        <button onClick={()=>toggle(1)}>最新</button>  <button onClick={()=>toggle(2)}>热门</button>
+      </div>
+      <div className="list-content">
+        <List data={data} />
+      </div>
+      <Loading loading={loading} />
     </div>
   )
 }

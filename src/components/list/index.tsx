@@ -6,7 +6,7 @@ export default function List(props:IList) {
   return (
     <>
       {
-        props.data.map((item:IItem) => <ListItem {...item} />)
+        props.data.map((item:IItem,index:number) => <ListItem {...item} key={index} />)
       }
     </>
   )
