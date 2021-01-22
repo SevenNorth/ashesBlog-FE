@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import List from '../../components/list'
 import Loading from '../../components/loading'
 
@@ -40,26 +39,28 @@ const testData2 = [
 ]
 
 const Home: React.FunctionComponent = () => {
-  let data = testData
   
-  const [loading, setLoading] = useState(false)
-  const toggle=async (key:number)=>{
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(testData);
+  const [flag, setFlag] = useState('newest');
+
+  useEffect(()=>{
     setLoading(true);
-    if(key===1){
-      data=testData
-    }else if(key === 2){
-      data = testData2
-    }
-    await setTimeout(()=>{},3000)
-    console.log(1,loading);
-    setLoading(false);
-    console.log(2,loading);
-  }
+    setTimeout(()=>{
+      setLoading(false);
+      // 模拟切换数据
+      if(flag==='newest'){
+        setData(testData);
+      }else{
+        setData(testData2);
+      }
+    },1000)
+  },[flag])
 
   return (
     <div className="wrap">
       <div className="navbar">
-        <button onClick={()=>toggle(1)}>最新</button>  <button onClick={()=>toggle(2)}>热门</button>
+        <button onClick={()=>setFlag('newest')}>最新</button>  <button onClick={()=>setFlag('hotest')}>热门</button>
       </div>
       <div className="list-content">
         <List data={data} />
