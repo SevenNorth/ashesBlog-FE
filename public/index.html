@@ -14,7 +14,15 @@
     <title>AshesBlog</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <script>
+    (function setRem() {
+      var docEl = document.documentElement;
+      var width = docEl.clientWidth;
+      var fontSize = 100 / 750 * width;
+      // window.requestAnimationFrame(setRem)
+      docEl.style.fontSize = fontSize + 'px';
+    })
+  </script>
 </html>
