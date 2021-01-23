@@ -1,8 +1,71 @@
 import React, { useState, useEffect } from 'react'
 import List from '../../components/list'
 import Loading from '../../components/loading'
+import { IItem } from '../../constantTypes/listTypes'
 
-const testData = [
+import './index.less'
+
+const testData :Array<IItem> = [
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
+  {
+    title: 'a',
+    summary: 'abc',
+    tags: ['q', 'w', 'e']
+  },
   {
     title: 'a',
     summary: 'abc',
@@ -20,7 +83,7 @@ const testData = [
   }
 ]
 
-const testData2 = [
+const testData2 :Array<IItem> = [
   {
     title: 'a2',
     summary: 'abc',
@@ -39,30 +102,33 @@ const testData2 = [
 ]
 
 const Home: React.FunctionComponent = () => {
-  
+
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(testData);
+  const [data, setData] = useState([] as Array<IItem>);
   const [flag, setFlag] = useState('newest');
 
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       setLoading(false);
       // 模拟切换数据
-      if(flag==='newest'){
+      if (flag === 'newest') {
         setData(testData);
-      }else{
+      } else {
         setData(testData2);
       }
-    },1000)
-  },[flag])
+    }, 1000)
+  }, [flag])
 
   return (
     <div className="wrap">
       <div className="navbar">
-        <button onClick={()=>setFlag('newest')}>最新</button>  <button onClick={()=>setFlag('hotest')}>热门</button>
+        <div className="navbar-inner">
+          <div className={ flag==="newest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => setFlag('newest')}>最新</div>
+          <div className={ flag==="hotest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => setFlag('hotest')}>热门</div>
+        </div>
       </div>
-      <div className="list-content">
+      <div className="list-wraper">
         <List data={data} />
       </div>
       <Loading loading={loading} />

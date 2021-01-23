@@ -9,7 +9,13 @@ import TabbarRoutes from '../../routes/tabbarRoutes';
 
 const useStyles = makeStyles({
   selected: {
-    color: "#cc1111",
+    color: "#4E5B61",
+    fontSize:"0.14rem !important"
+  },
+  label: {
+    fontSize:"0.12rem",
+    transitionDelay:'0s',
+    color: "#aaa"
   },
 });
 
@@ -34,10 +40,15 @@ function Tabbar(props: any) {
             return (
               <BottomNavigationAction
                 label={route.meta.title}
-                icon={props.location.pathname === route.path ? <route.meta.selectedIcon style={{color:"#cc1111"}} /> : <route.meta.icon  />}
+                icon={props.location.pathname === route.path 
+                  ? 
+                  <route.meta.selectedIcon style={{color:"#4E5B61",fontSize:"0.25rem"}} /> 
+                  : 
+                  <route.meta.icon style={{ fontSize:"0.24rem",color:"#aaa"}} 
+                  />}
                 key={route.path}
                 value={route.path}
-                classes={{selected:classes.selected}}
+                classes={{label:classes.label,selected:classes.selected}}
                 showLabel />
             )
           })

@@ -10,6 +10,6 @@ export default function Loading(props:{loading:boolean}) {
       <CircularProgress />
     </div>
     :
-    <div></div>
+    <div className="none"></div>
   )
 }
