@@ -8,12 +8,12 @@ import './index.less'
 const testData :Array<IItem> = [
   {
     title: 'a',
-    summary: 'abc',
-    tags: ['q', 'w', 'e']
+    summary:'Time goes by so fast, people go in and out of your life. You must never miss the opportunity to tell these people how much they mean to you.',
+    tags: ['js', 'html', 'css']
   },
   {
     title: 'a',
-    summary: 'abc',
+    summary: '一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本一些文本',
     tags: ['q', 'w', 'e']
   },
   {
