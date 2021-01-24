@@ -129,7 +129,11 @@ const Home: React.FunctionComponent = () => {
         </div>
       </div>
       <div className="list-wraper">
+        {/* todo: 下拉刷新 */}
+        {/* <div>释放更新</div> */}
         <List data={data} />
+        {/* todo：上拉加载 */}
+        {/* <div>点击加载更多</div> */}
       </div>
       <Loading loading={loading} />
     </div>
