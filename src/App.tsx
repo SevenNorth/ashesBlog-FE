@@ -16,7 +16,7 @@ export default function App() {
         height: "100%"
       }}
     >
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, height: "100%", overflowY:"auto"}}>
         <Switch>
           <Route path="/app/home" component={Home} />
           <Route path="/app/discovery" component={Discovery} />

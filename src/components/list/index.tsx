@@ -1,21 +1,15 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { IItem, IList } from '../../constantTypes/listTypes'
+import ListItem from './Item'
 
-function ListItem(props:any) {
-  console.log(props);
+import './index.less'
+
+export default function List(props:{data:IList}) {
   return (
-    <div className='list-item'>
-      <div className='list-item-header'>
-        {props.title}
-      </div>
-      <div className='list-item-content'>
-        {props.summary}
-      </div>
-      <div className='list-item-footer'>
-        tags
-      </div>
+    <div className="list">
+      {
+        props.data.map((item:IItem,index:number) => <ListItem {...item} key={index} />)
+      }
     </div>
   )
 }
-
-export default withRouter(ListItem);

@@ -1,0 +1,21 @@
+.list{
+  &-item{
+    padding: 2px 5px 8px;
+    &-header{
+      font-size: 0.18rem;
+    }
+    &-content{
+      color: #aaa;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;  
+      -webkit-line-clamp: 3;  
+      -webkit-box-orient: vertical;
+      padding-top: 5px;
+      margin-bottom: 5px;
+    }
+    &-footer{
+      color: red;
+    }
+  }
+}
