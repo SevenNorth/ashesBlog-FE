@@ -1,8 +1,10 @@
-import { CircularProgress } from '@material-ui/core'
 import React from 'react'
+import { CircularProgress } from '@material-ui/core'
 
 import './index.less'
-export default function Loading(props:{loading:boolean}) {
+import { connect } from 'react-redux'
+
+const Loading = (props:{loading:boolean}) => {
   return (
     props.loading
     ?
@@ -13,3 +15,9 @@ export default function Loading(props:{loading:boolean}) {
     <div className="none"></div>
   )
 }
+
+export default connect(
+  (state:any)=>({
+    loading: state.loading,
+  })
+)(Loading)
