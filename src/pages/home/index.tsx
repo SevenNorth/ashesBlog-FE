@@ -106,7 +106,6 @@ const testData2 :Array<IItem> = [
 ]
 
 const Home: React.FunctionComponent = (props:any) => {
-  console.log(props.state)
   const [data, setData] = useState([] as Array<IItem>);
   useEffect(() => {
     props.toggleLoading(true);
@@ -144,7 +143,6 @@ const Home: React.FunctionComponent = (props:any) => {
 export default connect(
   (state: any)=>({
     flag:state.flag,
-    state
   }),
   dispatch=>({
     toggleLoading:(status:boolean)=>dispatch(toggleLoading(status)),

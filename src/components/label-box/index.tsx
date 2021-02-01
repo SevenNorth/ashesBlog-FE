@@ -49,7 +49,7 @@ function LabelBox(props:ILabelBox) {
                           key={label}/>
           })
           :
-          <div className="hidden">当前热门搜索已隐藏</div>
+          <div className="hidden">当前{props.title}已隐藏</div>
         }
       </div>
     </div>
