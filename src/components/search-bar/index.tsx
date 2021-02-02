@@ -1,24 +1,36 @@
 import React from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
+// eslint-disable-next-line
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import { HighlightOff } from '@material-ui/icons';
+import { ArrowBackIos, HighlightOff, Telegram } from '@material-ui/icons';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+
+interface ISearchBar extends RouteComponentProps {
+  search:Function,
+  value:string,
+  setValue:Function,
+  goBack?:boolean
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     input: {
-      marginLeft: theme.spacing(1),
       flex: 1,
       fontSize:'0.14rem',
       height:'100%',
+      backgroundColor:'#fff',
+      paddingLeft: "5px",
+      marginLeft:"0"
     },
     iconButton: {
       padding: 10,
       fontSize:'0.14rem',
+      borderRadius:'0'
     },
     divider: {
-      color:'#ddd'
+      color:'#ddd',
     },
     root:{
       height:'100%'
@@ -26,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SearchNavbar(props:{search:Function,value:string,setValue:Function}) {
+function SearchNavbar(props:ISearchBar) {
   const classes = useStyles();
 
   const searchHandle=()=>{
@@ -35,6 +47,18 @@ export default function SearchNavbar(props:{search:Function,value:string,setValu
 
   return (
       <div className="navbar-inner">
+        {
+          props.goBack
+          ?
+          <IconButton classes={{root:classes.root}} 
+            className={classes.iconButton}
+            style={{padding:"10px 2px 10px 5px"}}
+            onClick={()=>props.history.push('app/discovery')} >
+              <ArrowBackIos style={{fontSize:'0.16rem',color: '#bbb'}} />
+          </IconButton>
+          :
+          null
+        }
         <InputBase
           classes={{root:classes.root}}
           className={classes.input}
@@ -47,7 +71,8 @@ export default function SearchNavbar(props:{search:Function,value:string,setValu
           props.value!==''
           ?
           <IconButton classes={{root:classes.root}} 
-            className={classes.iconButton} 
+            className={classes.iconButton}
+            style={{backgroundColor:"#fff"}}
             aria-label="search" 
             onClick={()=>props.setValue('')} >
               <HighlightOff style={{fontSize:'0.16rem',color: '#bbb'}} />
@@ -55,14 +80,16 @@ export default function SearchNavbar(props:{search:Function,value:string,setValu
           :
           null
         }
-        <Divider className={classes.divider} orientation="vertical" />
+        {/* <Divider className={classes.divider} orientation="vertical" /> */}
         <IconButton 
           classes={{root:classes.root}}
           className={classes.iconButton}
           onClick={searchHandle}
           aria-label="search">
-            搜索
+            <Telegram style={{fontSize:'0.16rem',color: '#bbb'}} />
         </IconButton>
       </div>
   );
 }
+
+export default withRouter(SearchNavbar)

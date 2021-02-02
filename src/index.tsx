@@ -8,6 +8,7 @@ import App from './App';
 import { createStore } from 'redux' ;
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
+import Result from './pages/result';
 
 const store = createStore(rootReducer);
 ReactDOM.render(
@@ -16,7 +17,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/app" component={ App } />
-          <Redirect to="/app/home" from="/" exact />
+          <Route path="/result" component={ Result } />
+          <Redirect to="/app/home" from="/" />
         </Switch>
       </Router>
     </Provider>
