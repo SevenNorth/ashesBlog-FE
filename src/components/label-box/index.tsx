@@ -43,11 +43,11 @@ function LabelBox(props:ILabelBox) {
         {
           props.showData
           ?
-          props.data.map((label:string|null) => {
+          props.data.map((label:string|null,index:number) => {
             return  <Chip label={label} 
                           classes={{label:classes.label, root:classes.root}}
                           onClick={()=>props.labelClick?.(label)}
-                          key={label}/>
+                          key={index}/>
           })
           :
           <div className="hidden">当前{props.title}已隐藏</div>
