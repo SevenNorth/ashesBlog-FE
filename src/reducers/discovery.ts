@@ -10,17 +10,11 @@ const showHot = (state = true , action: any)=>{
 }
 
 const historySearch = (state=getLocalSorage('historySearch'),action:any) => {
-  console.log(state === [])
-  let newState = [...state] || []
+  let newState = [...state]
   switch (action.type) {
     case 'ADD_HISTORY_SEARCH':
-      const index = newState.indexOf(action.history)
-      if(index > 0){
-        newState=newState.splice(index,1)
-        newState.unshift(action.history)
-      }else{
-        newState.push(action.history)
-      }
+      newState = newState.filter((history:string)=>history!==action.history)
+      newState.unshift(action.history)
       setLocalSorage('historySearch',JSON.stringify(newState))
       return newState;
     case 'DEL_HISTORY_SEARCH':

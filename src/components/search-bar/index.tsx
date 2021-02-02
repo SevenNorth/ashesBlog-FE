@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -26,13 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SearchNavbar(props:{search:Function}) {
+export default function SearchNavbar(props:{search:Function,value:string,setValue:Function}) {
   const classes = useStyles();
 
-  const [searchValue, setSearchValue] = useState('')
-
   const searchHandle=()=>{
-    props.search(searchValue)
+    props.search(props.value)
   }
 
   return (
@@ -42,16 +40,16 @@ export default function SearchNavbar(props:{search:Function}) {
           className={classes.input}
           placeholder="Search For Something Interesting"
           inputProps={{ 'aria-label': 'Search For Something Interesting' }}
-          onChange={(e=>setSearchValue(e.target.value))}
-          value={searchValue}
+          onChange={(e=>props.setValue(e.target.value))}
+          value={props.value}
         />
         {
-          searchValue!==''
+          props.value!==''
           ?
           <IconButton classes={{root:classes.root}} 
             className={classes.iconButton} 
             aria-label="search" 
-            onClick={()=>setSearchValue('')} >
+            onClick={()=>props.setValue('')} >
               <HighlightOff style={{fontSize:'0.16rem',color: '#bbb'}} />
           </IconButton>
           :

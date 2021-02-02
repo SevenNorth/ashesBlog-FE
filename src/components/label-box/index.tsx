@@ -46,6 +46,7 @@ function LabelBox(props:ILabelBox) {
           props.data.map((label:string|null) => {
             return  <Chip label={label} 
                           classes={{label:classes.label, root:classes.root}}
+                          onClick={()=>props.labelClick?.(label)}
                           key={label}/>
           })
           :

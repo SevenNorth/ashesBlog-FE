@@ -117,7 +117,7 @@ const Home: React.FunctionComponent = (props:any) => {
       } else {
         setData(testData2);
       }
-    }, 1000)
+    }, 300)
   // eslint-disable-next-line
   }, [props.flag])
 
