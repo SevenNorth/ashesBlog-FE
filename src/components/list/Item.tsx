@@ -47,7 +47,8 @@ function ListItem(props: any) {
         {
           props.tags.map((tag:any)=>{
             return <Chip label={tag} 
-                          classes={{label:classes.label, root:classes.root}} 
+                          classes={{label:classes.label, root:classes.root}}
+                          key={tag}
                           style={getColor(tag)}/>
         })
         }

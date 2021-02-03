@@ -3,6 +3,10 @@ import List from '../../components/list'
 import Loading from '../../components/loading'
 import { IItem } from '../../constantTypes/listTypes'
 
+import { connect } from 'react-redux'
+import { toggleLoading } from '../../actions/loading'
+import { toggleFlag } from '../../actions/flag'
+
 import './index.less'
 
 const testData :Array<IItem> = [
@@ -101,31 +105,28 @@ const testData2 :Array<IItem> = [
   }
 ]
 
-const Home: React.FunctionComponent = () => {
-
-  const [loading, setLoading] = useState(false);
+const Home: React.FunctionComponent = (props:any) => {
   const [data, setData] = useState([] as Array<IItem>);
-  const [flag, setFlag] = useState('newest');
-
   useEffect(() => {
-    setLoading(true);
+    props.toggleLoading(true);
     setTimeout(() => {
-      setLoading(false);
+      props.toggleLoading(false);
       // 模拟切换数据
-      if (flag === 'newest') {
+      if (props.flag === 'newest') {
         setData(testData);
       } else {
         setData(testData2);
       }
-    }, 1000)
-  }, [flag])
+    }, 300)
+  // eslint-disable-next-line
+  }, [props.flag])
 
   return (
     <div className="wrap">
       <div className="navbar">
         <div className="navbar-inner">
-          <div className={ flag==="newest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => setFlag('newest')}>最新</div>
-          <div className={ flag==="hotest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => setFlag('hotest')}>热门</div>
+          <div className={ props.flag==="newest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => props.toggleFlag('newest')}>最新</div>
+          <div className={ props.flag==="hotest" ? "flag-btn flag-btn-on":"flag-btn"} onClick={() => props.toggleFlag('hotest')}>热门</div>
         </div>
       </div>
       <div className="list-wraper">
@@ -135,8 +136,16 @@ const Home: React.FunctionComponent = () => {
         {/* todo：上拉加载 */}
         {/* <div>点击加载更多</div> */}
       </div>
-      <Loading loading={loading} />
+      <Loading />
     </div>
   )
 }
-export default Home
+export default connect(
+  (state: any)=>({
+    flag:state.flag,
+  }),
+  dispatch=>({
+    toggleLoading:(status:boolean)=>dispatch(toggleLoading(status)),
+    toggleFlag:(flag:string)=>dispatch(toggleFlag(flag))
+  })
+)(Home)
