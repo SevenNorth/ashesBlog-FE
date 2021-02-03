@@ -9,6 +9,7 @@ import { createStore } from 'redux' ;
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import Result from './pages/result';
+import Article from './pages/article';
 
 const store = createStore(rootReducer);
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/app" component={ App } />
           <Route path="/result" component={ Result } />
+          <Route path="/article" component={ Article } />
           <Redirect to="/app/home" from="/" />
         </Switch>
       </Router>
