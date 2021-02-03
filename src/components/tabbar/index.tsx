@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 function Tabbar(props: any) {
   const classes = useStyles();
-  const [value, setValue] = useState("/app/home");
+  const [value, setValue] = useState(props.location.pathname);
 
   const changeTab = (e: any, path: string) => {
     setValue(path);
