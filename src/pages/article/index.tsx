@@ -1,11 +1,87 @@
-import React from 'react'
+import { Drawer } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import { KeyboardBackspace, MoreHoriz } from '@material-ui/icons'
+import React, { useState } from 'react'
+import './index.less'
 
-export default function Article(props:any) {
+const testTxt:string = `<h2>测试文本</h2>测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本
+测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本`
+
+const useStyles = makeStyles({
+  root:{
+    // backgroundColor:"#f00"
+  }
+});
+
+const Article:React.FunctionComponent =(props:any) => {
+  const classes=useStyles()
+  const [drawerState, setDrawerState] = useState(false)
   return (
     <div className="wrap">
-      文章
-      <br/>
-      {props.location.state}
+      <div className="navbar">
+        <div className="navbar-inner article-navbar">
+          <KeyboardBackspace style={{fontSize:'0.18rem',color: '#333'}} onClick={()=>props.history.goBack()} />
+          <div className="article-title">{props.location.state}</div>
+          <MoreHoriz style={{fontSize:'0.18rem',color: '#333'}} onClick={()=>setDrawerState(true)} />
+        </div>
+      </div>
+      <div className="article-wraper">
+        <article>
+          <div dangerouslySetInnerHTML={{__html:testTxt}}></div>
+        </article>
+      </div>
+      <Drawer anchor={'bottom'} open={drawerState} onClose={()=>setDrawerState(false)} classes={{root:classes.root}} >
+        ceshi 
+        <br/>
+        ceshi 
+        <br/>
+        ceshi 
+        <br/>
+        ceshi 
+      </Drawer>
     </div>
   )
 }
+export default Article
