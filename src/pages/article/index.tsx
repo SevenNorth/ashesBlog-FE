@@ -1,6 +1,7 @@
 import { IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { CreateOutlined, Favorite, FavoriteBorder, KeyboardBackspace, ThumbUpAlt, ThumbUpAltOutlined } from '@material-ui/icons'
+// eslint-disable-next-line
+import { CreateOutlined, Favorite, FavoriteBorder, KeyboardBackspace, ShareOutlined, ThumbUpAlt, ThumbUpAltOutlined } from '@material-ui/icons'
 // eslint-disable-next-line
 import React, { useState } from 'react'
 import './index.less'
@@ -77,8 +78,9 @@ const Article:React.FunctionComponent =(props:any) => {
         <div className="navbar-inner article-navbar">
           <KeyboardBackspace style={{fontSize:'0.18rem',color: '#333'}} onClick={()=>props.history.goBack()} />
           <div className="article-title">{props.location.state}</div>
+          <ShareOutlined style={{fontSize:'0.18rem',color: '#333'}} />
           {/* 文章作者可以进行编辑 */}
-          { 1 ? <CreateOutlined style={{fontSize:'0.18rem',color: '#333'}} /> : null}
+          {/* { 1 ? <CreateOutlined style={{fontSize:'0.18rem',color: '#333'}} /> : null} */}
         </div>
       </div>
       <div className="article-wraper">
