@@ -8,7 +8,7 @@ export default function List(props:{data:IList}) {
   return (
     <div className="list">
       {
-        props.data.map((item:IItem,index:number) => <ListItem {...item} key={index} />)
+        props.data.map((item:IItem,index:number) => <ListItem {...item} key={item.uniId} />)
       }
     </div>
   )

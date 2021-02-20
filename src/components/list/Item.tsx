@@ -36,7 +36,7 @@ function ListItem(props: any) {
   }
 
   return (
-    <div className='list-item'>
+    <div className='list-item' onClick={()=>props.history.push('/article/'+props.uniId,props.title)}>
       <div className='list-item-header'>
         {props.title}
       </div>

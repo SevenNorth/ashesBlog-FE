@@ -1,9 +1,9 @@
-import { type } from "os"
 
 interface IItem {
   title: string;
   summary: string;
   tags: Array<string>;
+  uniId:string;
   children?: any;
 }
 

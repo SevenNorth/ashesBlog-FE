@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft:"0"
     },
     iconButton: {
-      padding: 10,
+      padding: 5,
       fontSize:'0.14rem',
       borderRadius:'0'
     },
@@ -33,7 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
       color:'#ddd',
     },
     root:{
-      height:'100%'
+      height:'100%',
+      display:'flex',
+      alignItems:'center'
     }
   }),
 );
@@ -52,7 +54,7 @@ function SearchNavbar(props:ISearchBar) {
           ?
           <IconButton classes={{root:classes.root}} 
             className={classes.iconButton}
-            style={{padding:"10px 2px 10px 5px"}}
+            style={{padding:"5px 2px 5px 5px"}}
             onClick={()=>props.history.push('app/discovery')} >
               <ArrowBackIos style={{fontSize:'0.16rem',color: '#bbb'}} />
           </IconButton>
