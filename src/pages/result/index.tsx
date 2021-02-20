@@ -12,13 +12,15 @@ const testData = (str:string):Array<IItem> => {
   const template :IItem = {
     title: 'a',
     summary:'Time goes by so fast, people go in and out of your life. You must never miss the opportunity to tell these people how much they mean to you.',
-    tags: ['js', 'html', 'css']
+    tags: ['js', 'html', 'css'],
+    uniId:"sdfs"
   }
   const len = Math.floor(Math.random()*10+1)*Math.floor(Math.random()*10+1)
 
   for(let i=0;i<len;i++){
     const temp = {...template}
     temp.title = str + '-' + (i+1)
+    temp.uniId = ''+ i
     data.push(temp)
   }
 
@@ -26,7 +28,7 @@ const testData = (str:string):Array<IItem> => {
 }
 
 const Result: React.FunctionComponent = (props:any) => {
-  const [value, setValue] = useState(props.location.search.split('=')[1])
+  const [value, setValue] = useState(window.decodeURI(props.location.search.split('=')[1]))
   const [data, setData] = useState([] as Array<IItem>)
 
   const search=(value:string)=>{
