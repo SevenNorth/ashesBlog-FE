@@ -3,7 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 // eslint-disable-next-line
 import { CreateOutlined, Favorite, FavoriteBorder, KeyboardBackspace, ShareOutlined, ThumbUpAlt, ThumbUpAltOutlined } from '@material-ui/icons'
 // eslint-disable-next-line
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
+import { toggleLoading } from '../../actions/loading'
+
+
+import Loading from '../../components/loading'
+
 import './index.less'
 
 const testTxt:string = `<h2>测试文本</h2>测试文本测试文本测试文本测试文本测试文本测试文本测试文本
@@ -72,6 +78,16 @@ const useStylesButton = makeStyles({
 const Article:React.FunctionComponent =(props:any) => {
   const classesIcon=useStylesIcon()
   const classesButton=useStylesButton()
+  
+  useEffect(() => {
+    // 模拟发送请求
+    props.toggleLoading(true)
+    setTimeout(()=>{
+      props.toggleLoading(false)
+    },500)
+  // eslint-disable-next-line
+  }, [])
+
   return (
     <div className="wrap">
       <div className="navbar">
@@ -98,7 +114,13 @@ const Article:React.FunctionComponent =(props:any) => {
           </IconButton>
         </div>
       </div>
+      <Loading />
     </div>
   )
 }
-export default Article
+export default connect(
+  null,
+  dispatch=>({
+    toggleLoading:(status:boolean)=>dispatch(toggleLoading(status)),
+  })
+)(Article)
