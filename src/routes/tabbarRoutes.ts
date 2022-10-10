@@ -24,7 +24,7 @@ const TabbarRoutes: ITabbarRoute[] = [
     path:'/app/discovery',
     component: Discovery ,
     meta: {
-      title:'发现',
+      title:'搜索',
       icon: SearchOutlined,
       selectedIcon: Search,
     }
@@ -36,6 +36,7 @@ const TabbarRoutes: ITabbarRoute[] = [
       title:'作品集',
       icon: CollectionsOutlined,
       selectedIcon: Collections,
+      hidden: true,
     }
   },{
     path:'/app/mine',

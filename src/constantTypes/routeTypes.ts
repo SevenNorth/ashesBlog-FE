@@ -5,6 +5,7 @@ interface IMeta {
   title: string;
   icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> ;
   selectedIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+  hidden?: boolean,
 }
 
 interface ITabbarRoute {

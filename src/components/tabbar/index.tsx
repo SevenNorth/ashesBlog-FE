@@ -37,7 +37,7 @@ function Tabbar(props: any) {
       <BottomNavigation value={value} onChange={changeTab} >
         {
           TabbarRoutes.map((route: ITabbarRoute) => {
-            return (
+            return !route.meta.hidden ? (
               <BottomNavigationAction
                 label={route.meta.title}
                 icon={props.location.pathname === route.path 
@@ -50,7 +50,7 @@ function Tabbar(props: any) {
                 value={route.path}
                 classes={{label:classes.label,selected:classes.selected}}
                 showLabel />
-            )
+            ): null;
           })
         }
       </BottomNavigation>
