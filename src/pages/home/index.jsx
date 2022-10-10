@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './index.less'
-import { List } from 'antd-mobile'
+import { List, NavBar } from 'antd-mobile'
+
 import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
 const rowCount = 100
@@ -21,20 +22,35 @@ const data = _.map(Array(rowCount), (_item, index) => {
 
 const Home: React.FunctionComponent = (props:any) => {
   return (
-      <List
-        mode='card'
-      >
-        {data.map((item) => (
-          <List.Item
-            key={item.uniqId}
-            arrow={false}
-            title={item.title}
-            onClick={()=>props.history.push('/article/'+item.uniId, {title: item.title})}
-          >
-            {item.summary}
-          </List.Item>
-        ))}
-      </List>
+    <div className="wrapper home">
+      <div className="navbar-wrapper">
+        <NavBar
+          style={{
+            '--height': '36px',
+            '--border-bottom': '1px #eee solid',
+          }}
+          back={null}
+        >
+          信息大厅
+        </NavBar>
+      </div>
+      <div className="list-wraper">
+        <List>
+          {
+              _.map(data, item => {
+                return <List.Item
+                key={item.uniqId}
+                arrow={false}
+                title={item.title}
+                onClick={()=>props.history.push('/article/'+item.uniId, {title: item.title})}
+              >
+                {item.summary}
+              </List.Item>
+              })
+            }
+        </List>
+      </div>
+    </div>
   )
 }
 export default withRouter(Home)

@@ -7,7 +7,7 @@ import _ from 'lodash'
 const Article:React.FunctionComponent =(props:any) => {
   const {title} = props.location.state;
   return (
-    <div className="wrap">
+    <div className="wrapper">
       <div className="navbar">
         <NavBar 
           style={{

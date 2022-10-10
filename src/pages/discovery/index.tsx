@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DeleteForeverOutlined, VisibilityOffOutlined, VisibilityOutlined } from '@material-ui/icons'
 import LabelBox from '../../components/label-box'
-
+import { SearchBar } from 'antd-mobile'
 
 import './index.less'
 import { connect } from 'react-redux'
@@ -22,7 +22,13 @@ const Discovery: React.FunctionComponent = (props:any) => {
 
   return (
     <div className="wrapper">
-      <div className="navbar">
+      <div className="searchBar-wrapper">
+        <SearchBar 
+          value={value}
+          clearable 
+          onChange={setValue}
+          onSearch={search}
+          />
       </div>
       <LabelBox title="历史搜索"
                 btnIcon={DeleteForeverOutlined}
