@@ -17,7 +17,7 @@ function ListItem(props: any) {
   const classes = useStyles();
 
   const getColor=(tag:string)=>{
-    let bgColor="#00f"
+    let bgColor;
     switch (tag) {
       case "js":
         bgColor="#f6cb5b"
