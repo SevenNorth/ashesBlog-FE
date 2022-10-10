@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { addHistorySearch } from '../../actions/discovery'
 import { toggleLoading } from '../../actions/loading'
-import SearchNavbar from '../../components/search-bar'
 import Loading from '../../components/loading'
 import List from '../../components/list'
 import { IItem } from '../../constantTypes/listTypes'
@@ -51,7 +50,7 @@ const Result: React.FunctionComponent = (props:any) => {
   return (
     <div className="wrap">
       <div className="navbar">
-        <SearchNavbar search={(value:string)=>search(value)} value={value} setValue={(value:string)=>setValue(value)} goBack />
+        。。。
       </div>
       <div className="list-wraper">
         <List data={data} />

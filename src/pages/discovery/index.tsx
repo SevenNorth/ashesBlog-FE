@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { DeleteForeverOutlined, VisibilityOffOutlined, VisibilityOutlined } from '@material-ui/icons'
 import LabelBox from '../../components/label-box'
-import SearchNavbar from '../../components/search-bar'
 
 
 import './index.less'
@@ -10,7 +9,7 @@ import { toggleShowTags, addHistorySearch, delHistorySearch, clearHistorySearch}
 
 const Discovery: React.FunctionComponent = (props:any) => {
   // eslint-disable-next-line
-  const [tagSearch, setTagSearch] = useState(['js','html','css','vue','react'])
+  const [tagSearch, setTagSearch] = useState(['债权','债务','出售','置换','抵押'])
   const [value, setValue] = useState('')
 
   const search=(value:string)=>{
@@ -22,9 +21,8 @@ const Discovery: React.FunctionComponent = (props:any) => {
   }
 
   return (
-    <div className="wrap">
+    <div className="wrapper">
       <div className="navbar">
-        <SearchNavbar search={(value:string)=>search(value)} value={value} setValue={(value:string)=>setValue(value)} />
       </div>
       <LabelBox title="历史搜索"
                 btnIcon={DeleteForeverOutlined}
