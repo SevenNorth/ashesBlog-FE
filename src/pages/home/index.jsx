@@ -29,7 +29,7 @@ const Home: React.FunctionComponent = (props:any) => {
             key={item.uniqId}
             arrow={false}
             title={item.title}
-            onClick={()=>props.history.push('/article/'+item.uniId, {title: props.title})}
+            onClick={()=>props.history.push('/article/'+item.uniId, {title: item.title})}
           >
             {item.summary}
           </List.Item>
